@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        ul{
+            list-style-type: none;
+            margin: 2px;
+            padding: 0px;
+            background-color: rgb(11, 16, 137);
+            overflow: hidden;
+            top: 0;
+            height: 2;
+            align-items: center;
+        }
+        li,#model{
+            float: right;
+            margin:10px;
+            background-color: rgb(11, 16, 137);
+            border: none;
+            color:white
+
+        }
+        button{
+            background-color: rgb(11, 16, 137);
+            color: white;
+            border: none;
+            text-align: center;
+            display: inline-block;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        #abc{
+            height:40px;
+            width:100px;
+            background-color:black;
+        }
+        div{
+            margin: 0;
+            padding: 0;
+            background-color:indianred;
+            height: 93vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        section{
+            margin: 0;
+            padding: 0;
+            background-color: rgb(196, 167, 104);
+            height: 500px;
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #msg{
+            margin: 10px;
+            padding: 10px;
+            width: 300px;
+            height: 200px;
+            border: none;
+            border-radius: 5px;
+        }
+        #form{
+            display: flex;
+            border-radius: 5px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        option{
+            border: none;
+        }
+
+    </style>
+</head>
+<body>
+    <ul>
+        <li style="margin-top: 16px;"><button onclick="document.getElementById('form').submit();">PREDICT</button></li>
+        <li>
+            <select id="model" name="model" onchange="myfun()" >
+                <option value="k">SELECT MODEL</option>
+                <option value="RF">Random Forest</option>
+                <option value="LR">Logistic REgression</option>
+                <!-- Add more options as needed -->
+            </select>
+        </li>
+        <li style="margin-top: 16px;"><button>HOME</button></li>
+    </ul>
+    <div>
+        <section>
+            <h1>FAKE NEWS DETECTION</h1>
+            <p>Enter the news to check if it is fake or not</p>
+            <form method="post" id="form">
+                {% csrf_token %}
+                <textarea id="msg" type="text" name="news" value="ufytfu" placeholder="Enter the news">{{news}}</textarea>
+                <input name="model" value="" id="hi" style="display: none;">
+                <button type="submit">Check</button>
+                <div id="abc">
+                <p id="co" style="color: yellow;">{{result}}</p>
+                </div>
+                <script>
+                    document.getElementById("co").style.color ="{{code}}";
+                    document.getElementById("model").value = "{{model}}";
+                </script>
+            </form>
+        </section>
+    </div>
+    <script>
+        function myfun(){
+            var x = document.getElementById("model").value;
+            document.getElementById("hi").value = x;
+        }
+    </script>
+</body>
+</html>
